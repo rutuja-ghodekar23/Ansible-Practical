@@ -1,0 +1,18 @@
+---
+- name: Configure sample systems
+  hosts: managed_systems
+  gather_facts: false
+
+  tasks:
+    - name: Display system name
+      ansible.builtin.debug:
+        msg: "Configuring {{ inventory_hostname }}"
+
+    - name: Create a configuration file
+      ansible.builtin.copy:
+        content: "Ansible configuration completed successfully."
+        dest: "/tmp/{{ inventory_hostname }}.txt"
+
+    - name: Confirm configuration
+      ansible.builtin.debug:
+        msg: "Configuration completed on {{ inventory_hostname }}"
